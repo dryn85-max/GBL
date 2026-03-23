@@ -73,6 +73,177 @@ a { text-decoration: none; color: inherit; }
 
 
 /* ============================================
+   NAVIGATION
+   ============================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 16px 24px;
+  transition: background 0.35s, box-shadow 0.35s, padding 0.35s;
+}
+.navbar.scrolled {
+  background: rgba(10,22,40,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.2);
+  padding: 10px 24px;
+}
+.nav-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 101;
+}
+.nav-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.95);
+  padding: 3px;
+}
+.nav-brand-text {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Desktop nav links — hidden on mobile */
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+.nav-link {
+  color: rgba(255,255,255,0.75);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+.nav-cta {
+  background: var(--green-700) !important;
+  color: #fff !important;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-left: 8px;
+  box-shadow: 0 2px 12px rgba(26,107,60,0.3);
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover {
+  background: var(--green-600) !important;
+  transform: translateY(-1px);
+}
+
+/* Hamburger button — visible on mobile only */
+.nav-burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 101;
+}
+.nav-burger span {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+/* Animate to X when open */
+.nav-burger.open span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+.nav-burger.open span:nth-child(2) {
+  opacity: 0;
+}
+.nav-burger.open span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* Mobile overlay menu */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,22,40,0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s;
+}
+.nav-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.nav-overlay .nav-link {
+  font-size: 22px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  padding: 14px 24px;
+  border-radius: 12px;
+  transition: color 0.2s, background 0.2s, transform 0.3s;
+  transform: translateY(20px);
+  opacity: 0;
+}
+.nav-overlay.open .nav-link {
+  transform: translateY(0);
+  opacity: 1;
+}
+.nav-overlay .nav-link:nth-child(1) { transition-delay: 0.05s; }
+.nav-overlay .nav-link:nth-child(2) { transition-delay: 0.1s; }
+.nav-overlay .nav-link:nth-child(3) { transition-delay: 0.15s; }
+.nav-overlay .nav-link:nth-child(4) { transition-delay: 0.2s; }
+.nav-overlay .nav-link:nth-child(5) { transition-delay: 0.25s; }
+.nav-overlay .nav-link:nth-child(6) { transition-delay: 0.3s; }
+.nav-overlay .nav-link:hover,
+.nav-overlay .nav-link.active {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+.nav-overlay .nav-cta {
+  margin-left: 0;
+  margin-top: 12px;
+  font-size: 20px;
+  padding: 16px 32px;
+  border-radius: 14px;
+}
+
+
+/* ============================================
    SECTION 1: HERO
    ============================================ */
 .hero {
@@ -116,29 +287,7 @@ a { text-decoration: none; color: inherit; }
   justify-content: space-between;
   min-height: 100vh;
   min-height: 100dvh;
-  padding: 0 24px;
-}
-.hero-top {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 40px;
-  gap: 12px;
-}
-.hero-logo {
-  width: 52px;
-  height: 52px;
-  object-fit: contain;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.95);
-  padding: 4px;
-}
-.hero-brand {
-  color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  padding: 80px 24px 0;
 }
 .hero-main {
   flex: 1;
@@ -787,12 +936,15 @@ a { text-decoration: none; color: inherit; }
 @media (min-width: 768px) {
   :root { --section-padding: 100px 48px; }
 
-  .hero-content { padding: 0 48px; }
+  /* Nav: show links, hide burger */
+  .nav-links { display: flex; }
+  .nav-burger { display: none; }
+
+  .hero-content { padding: 80px 48px 0; }
   .hero-headline { font-size: 48px; }
   .hero-sub { font-size: 18px; }
   .hero-buttons { flex-direction: row; }
   .btn-primary, .btn-secondary { width: auto; display: inline-block; }
-  .hero-top { justify-content: flex-start; }
   .form-row-2 { grid-template-columns: 1fr 1fr; }
   .parcel-form { padding: 44px 40px; }
 
@@ -817,7 +969,7 @@ a { text-decoration: none; color: inherit; }
 
 @media (min-width: 1024px) {
   :root { --section-padding: 120px 48px; }
-  .hero-content { padding: 0 80px; max-width: 1200px; margin: 0 auto; }
+  .hero-content { padding: 80px 80px 0; max-width: 1200px; margin: 0 auto; }
   .hero-headline { font-size: 56px; }
 
   .section-title { font-size: 42px; }
@@ -831,6 +983,42 @@ a { text-decoration: none; color: inherit; }
 <body>
 
 <!-- ============================================
+     NAVIGATION
+     ============================================ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="#hero" class="nav-brand">
+      <img class="nav-logo" src="logo.jpeg" alt="Golf Bridge Logistics logo">
+      <span class="nav-brand-text">Golf Bridge Logistics</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#how-it-works" class="nav-link">How It Works</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#for-clubs" class="nav-link">For Golf Clubs</a>
+      <a href="#trust" class="nav-link">Trust & Quality</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#send-parcel" class="nav-link nav-cta">Send Your Parcel</a>
+    </div>
+    <button class="nav-burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile overlay menu (clone of nav-links for mobile) -->
+<div class="nav-overlay" id="nav-overlay">
+  <a href="#how-it-works" class="nav-link">How It Works</a>
+  <a href="#about" class="nav-link">About</a>
+  <a href="#for-clubs" class="nav-link">For Golf Clubs</a>
+  <a href="#trust" class="nav-link">Trust & Quality</a>
+  <a href="#contact" class="nav-link">Contact</a>
+  <a href="#send-parcel" class="nav-link nav-cta">Send Your Parcel</a>
+</div>
+
+
+<!-- ============================================
      SECTION 1: HERO
      ============================================ -->
 <section class="hero" id="hero">
@@ -838,10 +1026,6 @@ a { text-decoration: none; color: inherit; }
     <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=1400&q=80" alt="Golf course at golden hour" loading="eager">
   </div>
   <div class="hero-content">
-    <div class="hero-top">
-      <img class="hero-logo" src="logo.jpeg" alt="Golf Bridge Logistics logo">
-      <span class="hero-brand">Golf Bridge Logistics</span>
-    </div>
     <div class="hero-main">
       <div class="hero-tagline">International Equipment Delivery</div>
       <h1 class="hero-headline">
@@ -1266,8 +1450,9 @@ a { text-decoration: none; color: inherit; }
      SCRIPTS
      ============================================ -->
 <script>
-// Intersection Observer for scroll animations
 document.addEventListener('DOMContentLoaded', () => {
+
+  // --- Intersection Observer for scroll animations ---
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1278,21 +1463,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Floating CTA — show after scrolling past hero
+
+  // --- Navigation: scroll-based solid background ---
+  const navbar = document.getElementById('navbar');
   const hero = document.getElementById('hero');
+
+  if (navbar && hero) {
+    const navScrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        navbar.classList.toggle('scrolled', !entry.isIntersecting);
+      });
+    }, { threshold: 0.85 });
+    navScrollObserver.observe(hero);
+  }
+
+
+  // --- Navigation: hamburger toggle ---
+  const burger = document.getElementById('nav-burger');
+  const overlay = document.getElementById('nav-overlay');
+
+  if (burger && overlay) {
+    burger.addEventListener('click', () => {
+      const isOpen = burger.classList.toggle('open');
+      overlay.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // Close menu when a link is clicked
+    overlay.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('open');
+        overlay.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+
+  // --- Navigation: active section highlighting ---
+  const sections = document.querySelectorAll('section[id], footer[id]');
+  const allNavLinks = document.querySelectorAll('.nav-link');
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        allNavLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-80px 0px -40% 0px' });
+
+  sections.forEach(section => sectionObserver.observe(section));
+
+
+  // --- Floating CTA — show after scrolling past hero ---
   const floatingCta = document.getElementById('floating-cta');
   const sendParcelSection = document.getElementById('send-parcel');
 
   if (hero && floatingCta) {
     const heroObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        // Show floating button when hero is NOT visible
         floatingCta.classList.toggle('visible', !entry.isIntersecting);
       });
     }, { threshold: 0.15 });
     heroObserver.observe(hero);
 
-    // Hide floating button when form section is visible
     if (sendParcelSection) {
       const formObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1309,7 +1548,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Toggle address fields based on delivery type
+
+  // --- Toggle address fields based on delivery type ---
   const deliveryRadios = document.querySelectorAll('input[name="deliveryType"]');
   const addressFields = document.getElementById('address-fields');
   if (deliveryRadios.length && addressFields) {
@@ -1322,6 +1562,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
 });
 
 // Form submission handler
