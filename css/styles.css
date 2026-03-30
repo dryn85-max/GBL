@@ -108,6 +108,45 @@ a { text-decoration: none; color: inherit; }
   text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
+/* Language switcher */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 12px;
+}
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: border-color 0.2s, opacity 0.2s, background 0.2s;
+  opacity: 0.5;
+  color: rgba(255,255,255,0.6);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.lang-btn:hover { opacity: 0.8; background: rgba(255,255,255,0.12); }
+.lang-btn.active {
+  opacity: 1;
+  border-color: var(--green-300);
+  background: rgba(109,187,138,0.15);
+  color: #fff;
+}
+.flag-icon {
+  width: 20px;
+  height: 10px;
+  border-radius: 2px;
+  display: block;
+  overflow: hidden;
+}
+
 /* Desktop nav links — hidden on mobile */
 .nav-links {
   display: none;
